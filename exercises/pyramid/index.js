@@ -85,8 +85,6 @@
 
 // Solution #4
 function pyramid(n, row = 0, level = "") {
-	midpoint = Math.floor((2 * n - 1) / 2);
-
 	if (n === row) {
 		return;
 	}
@@ -96,13 +94,16 @@ function pyramid(n, row = 0, level = "") {
 		return pyramid(n, row + 1, (level = ""));
 	}
 
+	const midpoint = Math.floor((2 * n - 1) / 2);
+	let add;
+
 	if (midpoint - row <= level.length && midpoint + row >= level.length) {
-		level += "#";
+		add = "#";
 	} else {
-		level += " ";
+		add = " ";
 	}
 
-	pyramid(n, row, level);
+	pyramid(n, row, level + add);
 }
 
 module.exports = pyramid;

@@ -51,6 +51,7 @@
 // 	////// Else
 // 	//////// Add a space to "stair"
 // 	//// Console log "stair"
+
 // 	for (let row = 0; row < n; row++) {
 // 		let stair = "";
 
@@ -74,7 +75,7 @@ function steps(n, row = 0, stair = "") {
 
 	if (n === stair.length) {
 		console.log(stair);
-		return steps(n, row + 1);
+		return steps(n, row + 1); // stair = "" is the default value if not passing in
 	}
 
 	if (stair.length <= row) {
