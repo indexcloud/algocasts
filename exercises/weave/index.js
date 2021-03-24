@@ -1,4 +1,4 @@
-// --- Directions
+ // --- Directions
 // 1) Complete the task in weave/queue.js
 // 2) Implement the 'weave' function.  Weave
 // receives two queues as arguments and combines the
@@ -24,6 +24,43 @@
 
 const Queue = require('./queue');
 
-function weave(sourceOne, sourceTwo) {}
+// Solution #1
+// function weave(sourceOne, sourceTwo) {
+//     // return a queue
+
+//     const q1 = sourceOne;
+//     const q2 = sourceTwo;
+ 
+//     return function remove() {
+//         let counter = 1;
+
+//         while(q1.peek() || q2.peek()) {
+//             if (counter %  2 !== 0) {
+//                 counter++;
+//                 return q1.remove();
+//             } else {
+//                 counter++;
+//                 return q2.remove();
+//             }
+//         }
+//     }
+    
+// }
+
+// Solution #2
+function weave(sourceOne, sourceTwo) {
+    const q = new Queue();
+
+    while(sourceOne.peek() || sourceOne.peek()) {
+        if (sourceOne.peek()) {
+            q.add(sourceOne.remove());
+        } 
+        if (sourceTwo.peek()) {
+            q.add(sourceTwo.remove());
+        }
+    }
+
+    return q;
+}
 
 module.exports = weave;
