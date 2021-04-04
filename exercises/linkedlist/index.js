@@ -9,6 +9,7 @@ class Node {
     }
 }
 
+// Something to consider: combine getFirst, getLast with getAt like getAt(0). Or combine insertFirst, insertLast with insertAt(data, 0);
 class LinkedList {
     constructor() {
         this.head = null;
@@ -174,21 +175,47 @@ class LinkedList {
     insertAt(data, index) {
         if (!this.head) {
             this.head = new Node(data);
+            return;
         }
 
         if (index === 0) {
-            this.insertFirst(data);
-        }
-
-        if (index >= this.size()) {
-            this.insertLast(data);
-        }
-
-        const previous = this.getAt(index - 1);
-        if (!previous || !previous.next) {
+            // this.insertFirst(data);
+            this.head = new Node(data, this.head);
             return;
         }
-        previous.next = new Node(data, previous.next);
+
+        // if (index >= this.size()) {
+        //     this.insertLast(data);
+        // }
+
+        // const previous = this.getAt(index - 1);
+        // if (!previous || !previous.next) {
+        //     return;
+        // }
+        // previous.next = new Node(data, previous.next);
+
+        const previous = this.getAt(index - 1) || this.getLast();
+        const node = new Node(data, previous.next);
+        previous.next = node;
+    }
+
+    forEach(fn) {
+        let node = this.head;
+        let counter = 0;
+
+        while (node) {
+            fn(node, counter);
+            node = node.next;
+            counter++;
+        }
+    }
+
+    *[Symbol.iterator]() {
+        let node = this.head;
+        while(node) {
+            yield node;
+            node = node.next;
+        }
     }
 }
 
