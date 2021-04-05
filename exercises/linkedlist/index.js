@@ -3,221 +3,218 @@
 // See 'directions' document
 
 class Node {
-    constructor(data, next = null) {
-        this.data = data;
-        this.next = next;
-    }
+	constructor(data, next = null) {
+		this.data = data;
+		this.next = next;
+	}
 }
 
 // Something to consider: combine getFirst, getLast with getAt like getAt(0). Or combine insertFirst, insertLast with insertAt(data, 0);
 class LinkedList {
-    constructor() {
-        this.head = null;
-    }
+	constructor() {
+		this.head = null;
+	}
 
-    insertFirst(data) {
-        this.head = new Node(data, this.head);
-    }
+	insertFirst(data) {
+		this.head = new Node(data, this.head);
+	}
 
-    size() {
-        let counter = 0;
-        let node = this.head;
+	size() {
+		let counter = 0;
+		let node = this.head;
 
-        while(node) {
-            counter++;
-            node = node.next;
-        }
+		while (node) {
+			counter++;
+			node = node.next;
+		}
 
-        return counter;
-    }
+		return counter;
+	}
 
-    getFirst() {
-        return this.head;
-    }
+	getFirst() {
+		return this.head;
+	}
 
-    getLast() {
-        if (!this.head) {
-            return null;
-        }
+	getLast() {
+		if (!this.head) {
+			return null;
+		}
 
-        let node = this.head;
+		let node = this.head;
 
-        // while(node.next) {
-        //     node = node.next;
-        // }
-        // return node;
-        while(node) {
-            if (!node.next) {
-                return node;
-            }
-            node = node.next;
-        }
-    }
+		// while(node.next) {
+		//     node = node.next;
+		// }
+		// return node;
+		while (node) {
+			if (!node.next) {
+				return node;
+			}
+			node = node.next;
+		}
+	}
 
-    clear() {
-        // let node = this.head;
+	clear() {
+		// let node = this.head;
 
-        // while(node) {
-        //     this.head = node.next;
-        //     node = node.next;
-        // }
-        // return this.head;
-        this.head = null;
-       
-    }
+		// while(node) {
+		//     this.head = node.next;
+		//     node = node.next;
+		// }
+		// return this.head;
+		this.head = null;
+	}
 
-    removeFirst() {
-        if (!this.head) {
-            return;
-        }
+	removeFirst() {
+		if (!this.head) {
+			return;
+		}
 
-        this.head = this.head.next;
-    }
+		this.head = this.head.next;
+	}
 
-    removeLast() {
-        if (!this.head) {
-            return;
-        } 
+	removeLast() {
+		if (!this.head) {
+			return;
+		}
 
-        if (!this.head.next) {
-            return this.head = null;
-        }
-       
-        // let previous = this.head;
-        // let node = previous.next;
+		if (!this.head.next) {
+			return (this.head = null);
+		}
 
-        // while(node) {
-        //     if (!node.next) {
-        //         return previous.next = null;
-        //     }
-        //     previous = node;
-        //     node = previous.next;
-        // }
+		// let previous = this.head;
+		// let node = previous.next;
 
-        let previous = this.head;
-        let node = this.head.next;
-        
-        while(node.next) {
-            previous = node;
-            node = node.next;
-        }
+		// while(node) {
+		//     if (!node.next) {
+		//         return previous.next = null;
+		//     }
+		//     previous = node;
+		//     node = previous.next;
+		// }
 
-        previous.next = null;
-    }
+		let previous = this.head;
+		let node = this.head.next;
 
-    insertLast(data) {
-        // if (!this.head) {
-        //     this.head = new Node(data);
-        // }
+		while (node.next) {
+			previous = node;
+			node = node.next;
+		}
 
-        // let node = this.getLast();
+		previous.next = null;
+	}
 
-        // node.next = new Node(data);
+	insertLast(data) {
+		// if (!this.head) {
+		//     this.head = new Node(data);
+		// }
 
-        const last = this.getLast();
+		// let node = this.getLast();
 
-        if (last) {
-            // There are some existing nodes in our chain
-            last.next = new Node(data);
-        } else {
-            // the chain is empty!
-            this.head = new Node(data);
-        }
-    }
+		// node.next = new Node(data);
 
-    getAt(index) {
-        let counter = 0;
-        let node = this.head;
+		const last = this.getLast();
 
-        // if (!node) {
-        //     return null;
-        // }
+		if (last) {
+			// There are some existing nodes in our chain
+			last.next = new Node(data);
+		} else {
+			// the chain is empty!
+			this.head = new Node(data);
+		}
+	}
 
-        // if (index > this.size()) {
-        //     return null;
-        // }
+	getAt(index) {
+		let counter = 0;
+		let node = this.head;
 
-        // while(counter < index) {
-        //     counter++;
-        //     node = node.next;
-        // }
+		// if (!node) {
+		//     return null;
+		// }
 
-        // return node;
-        while (node) {
-            if (counter === index) {
-                return node;
-            }
-            counter++;
-            node = node.next;
-        }
+		// if (index > this.size()) {
+		//     return null;
+		// }
 
-        return null;
-    }
+		// while(counter < index) {
+		//     counter++;
+		//     node = node.next;
+		// }
 
-    removeAt(index) {
-        if (!this.head) {
-            return;
-        }
+		// return node;
+		while (node) {
+			if (counter === index) {
+				return node;
+			}
+			counter++;
+			node = node.next;
+		}
 
-        if (index === 0) {
-            this.head = this.head.next;
-            return;
-        }
+		return null;
+	}
 
-        const previous = this.getAt(index - 1);
-        if (!previous || !previous.next) {
-            return;
-        }
-        previous.next = previous.next.next;
+	removeAt(index) {
+		if (!this.head) {
+			return;
+		}
 
-    }
+		if (index === 0) {
+			this.head = this.head.next;
+			return;
+		}
 
-    insertAt(data, index) {
-        if (!this.head) {
-            this.head = new Node(data);
-            return;
-        }
+		const previous = this.getAt(index - 1);
+		if (!previous || !previous.next) {
+			return;
+		}
+		previous.next = previous.next.next;
+	}
 
-        if (index === 0) {
-            // this.insertFirst(data);
-            this.head = new Node(data, this.head);
-            return;
-        }
+	insertAt(data, index) {
+		if (!this.head) {
+			this.head = new Node(data);
+			return;
+		}
 
-        // if (index >= this.size()) {
-        //     this.insertLast(data);
-        // }
+		if (index === 0) {
+			// this.insertFirst(data);
+			this.head = new Node(data, this.head);
+			return;
+		}
 
-        // const previous = this.getAt(index - 1);
-        // if (!previous || !previous.next) {
-        //     return;
-        // }
-        // previous.next = new Node(data, previous.next);
+		// if (index >= this.size()) {
+		//     this.insertLast(data);
+		// }
 
-        const previous = this.getAt(index - 1) || this.getLast();
-        const node = new Node(data, previous.next);
-        previous.next = node;
-    }
+		// const previous = this.getAt(index - 1);
+		// if (!previous || !previous.next) {
+		//     return;
+		// }
+		// previous.next = new Node(data, previous.next);
 
-    forEach(fn) {
-        let node = this.head;
-        let counter = 0;
+		const previous = this.getAt(index - 1) || this.getLast();
+		const node = new Node(data, previous.next);
+		previous.next = node;
+	}
 
-        while (node) {
-            fn(node, counter);
-            node = node.next;
-            counter++;
-        }
-    }
+	forEach(fn) {
+		let node = this.head;
+		let counter = 0;
 
-    *[Symbol.iterator]() {
-        let node = this.head;
-        while(node) {
-            yield node;
-            node = node.next;
-        }
-    }
+		while (node) {
+			fn(node, counter);
+			node = node.next;
+			counter++;
+		}
+	}
+
+	*[Symbol.iterator]() {
+		let node = this.head;
+		while (node) {
+			yield node;
+			node = node.next;
+		}
+	}
 }
 
-
-module.exports = { Node, LinkedList };
+module.exports = {Node, LinkedList};
